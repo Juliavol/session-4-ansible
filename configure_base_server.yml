@@ -1,0 +1,58 @@
+---
+- name: configure base server
+
+  hosts: webservers
+
+  remote_user: centos
+
+  sudo: yes
+
+
+  tasks:
+
+  - name: Install EPEL repo.
+
+    yum:
+
+      name: epel-release
+
+      state: present
+
+
+  - name: Install NTP
+
+    yum: name=ntp state=installed
+
+    tags: ntp
+
+
+  - name: Copy over the NTP configuration
+
+    template: src=./templates/ntp.conf dest=/etc/ntp.conf
+
+    notify:
+
+    - restart ntpd
+
+    tags: ntp
+
+
+  - name: Make sure NTP is stopped
+
+    service: name=ntpd state=stopped enabled=yes
+
+    tags: ntp
+
+
+  - name: Make sure NTP is started up
+
+    service: name=ntpd state=running enabled=yes
+
+    tags: ntp
+
+
+  handlers:
+
+  - name: restart ntpd
+
+    service: name=ntpd state=restarted

@@ -1,0 +1,56 @@
+---
+ - name: webserver setup
+   hosts: webservers
+   remote_user: centos
+   become: yes
+
+   vars:
+     http_port: 80
+     max_clients: 200
+
+
+   tasks:
+   - name: create directory for index.html
+     file:
+       path: /var/www/html
+       state: directory
+
+
+   - name: create index.html file if it doesn't exist
+     file:
+       path: "/var/www/html/index.html"
+       state: touch
+
+
+   - name: update content of index.html file in /var/www/html/index.html
+
+     blockinfile:
+       path: /var/www/html/index.html
+       block: |
+         <html>
+         <head>
+         <title>Ansible test page</title>
+         </head>
+         <body>
+
+         <h1>Apache Web Server </h1>
+         <p>This was generated using Ansible</p>
+
+         </body>
+         </html>
+
+   - name: install apache
+     yum:
+       name: httpd
+       state: present
+
+   - name: write the apache config file
+     template:
+      src: /srv/httpd.j2
+      dest: /etc/httpd.conf
+
+   - name: start httpd
+     service:
+       name: httpd
+       state: started
+       enabled: yes

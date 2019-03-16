@@ -1,58 +1,39 @@
 ---
 - name: configure base server
-
   hosts: webservers
-
   remote_user: centos
-
-  sudo: yes
+  become: yes
 
 
   tasks:
 
   - name: Install EPEL repo.
-
     yum:
-
       name: epel-release
-
       state: present
 
 
   - name: Install NTP
-
     yum: name=ntp state=installed
-
     tags: ntp
 
 
   - name: Copy over the NTP configuration
-
-    template: src=./templates/ntp.conf dest=/etc/ntp.conf
-
+    get_url:
+      url: https://raw.githubusercontent.com/shayharush/opsschol-ansible/master/session1/files/ntp.conf
+      dest: /etc/ntp.conf
+      mode: 0440
     notify:
-
-    - restart ntpd
-
-    tags: ntp
-
+      - restart ntpd
 
   - name: Make sure NTP is stopped
-
     service: name=ntpd state=stopped enabled=yes
-
     tags: ntp
-
 
   - name: Make sure NTP is started up
-
-    service: name=ntpd state=running enabled=yes
-
+    service: name=ntpd state=started enabled=yes
     tags: ntp
 
-
   handlers:
-
   - name: restart ntpd
-
     service: name=ntpd state=restarted

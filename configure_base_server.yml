@@ -34,6 +34,11 @@
     service: name=ntpd state=started enabled=yes
     tags: ntp
 
+  - name: Check that you can connect (GET) to a page and it returns a status 200
+    uri:
+      url: http://node1.opsschool.com
+
   handlers:
   - name: restart ntpd
-    service: name=ntpd state=restarted
+    service: name=ntpd state=started
+

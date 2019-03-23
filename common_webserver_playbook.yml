@@ -1,0 +1,16 @@
+---
+- name: apply the common configuration to all hosts
+  hosts: all
+  remote_user: centos
+  become: yes
+
+  roles:
+  - common
+
+- name: spply the webserver configuration to web hosts
+  hosts: webservers
+  remote_user: centos
+  become: yes
+
+  roles:
+  - webserver

@@ -1,8 +1,8 @@
 ---
 - name: Install EPEL repo.
-    yum:
-      name: http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-      state: present
+  yum:
+    name: http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    state: present
 
 - include: selinux.yml
 - include: ntp.yml

@@ -1,7 +1,7 @@
 ---
 - name: Install NTP
-    yum: name=ntp state=installed
-    tags: ntp
+  yum: name=ntp state=installed
+  tags: ntp
 
 
 - name: Copy over the NTP configuration

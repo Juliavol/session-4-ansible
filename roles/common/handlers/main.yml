@@ -1,5 +1,5 @@
 ---
 - name: restart ntpd
-    service:
-      name: ntpd
-      state: started
+  service:
+    name: ntpd
+    state: started

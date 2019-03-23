@@ -1,4 +1,3 @@
-
 node ('jenkins_node_01'){
    currentBuild.result = "SUCCESS"
    stage('Printing hello world'){

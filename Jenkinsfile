@@ -1,12 +1,3 @@
-node {
-	echo 'hello world
-	echo 'hello world
-	echo 'hello world
-	echo 'hello world
-	echo 'hello world
-	}
-=======
-
 node ('jenkins_node_01'){
    currentBuild.result = "SUCCESS"
    stage('Printing hello world'){

@@ -1,4 +1,4 @@
 ---
-- vars:
-    http_port: 80
-    max_clients: 200
+vars:
+  http_port: 80
+  max_clients: 200

@@ -4,13 +4,13 @@
 
 - name: create directory for index.html
   file:
-    path: {{apache_docroot}}
+    path: "{{apache_docroot}}"
     state: directory
 
 - name: Add index.html to /var/www/html
   template:
     src: index.html
-    dest: {{apache_docroot}}/index.html
+    dest: "{{apache_docroot}}/index.html"
 
 - name: install apache
   yum:
@@ -24,8 +24,8 @@
     enabled: yes
 
 - name: Check that you can connect (GET) to a page and it returns a status 200
-    uri:
-      url: http://node1.opsschool.com
-      return_content: yes
+  uri:
+    url: http://node1.opsschool.com
+    return_content: yes
     register: result
     until: '"Ansible test page" in result.content'

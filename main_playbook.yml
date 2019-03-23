@@ -1,5 +1,5 @@
 ---
-- name: spply the common configuration to all hosts
+- name: apply the common configuration to all hosts
   hosts: all
   remote_user: centos
   become: yes
@@ -7,7 +7,7 @@
   roles:
   - common
 
-- name: spply the db configuration to db hosts
+- name: apply the db configuration to db hosts
   hosts: dbservers
   remote_user: centos
   become: yes

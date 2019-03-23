@@ -1,8 +1,4 @@
 ---
-- name: Add mysql yum repo
-  yum_repository: https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
-  state: present
-
 - name: Add mysql yum repository
   yum:
     name: https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
@@ -13,15 +9,11 @@
     name: mysql-server
     state: present
 
-- name: disable selinux
-  selinux:
-  state: disabled
-
 - name: set buffer size of my.cnf with 60 ram
       # Set read_only variable to 1
   mysql_variables:
-  variable: read_only
-  value: 1
+    variable: read_only
+    value: 1
 
 - name: Add innodb_buffer_pool_size to my.cnf
   blockinfile:
